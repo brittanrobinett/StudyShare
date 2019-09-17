@@ -17,4 +17,14 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/edit-message').post((req, res) => {
+    const newContent = req.body.content;
+
+    const newMessage = new Message({ content });
+
+    newMessage.save()
+        .then(() => res.json('Message created!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
 module.exports = router;
