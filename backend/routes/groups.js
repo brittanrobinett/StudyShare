@@ -1,5 +1,7 @@
 const router = require('express').Router();
+const session = require('express-session')
 let Group = require('../models/group.model');
+
 
 // pre: There are groups
 // post: Return array of all group objects
