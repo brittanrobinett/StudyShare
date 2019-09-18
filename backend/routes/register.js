@@ -9,19 +9,19 @@ const SESS_NAME = 'sid';
 const SESS_SECRET = 'youshouldchangethis'
 const IN_PROD = false;
 
-router.use(session({
-  name: SESS_NAME,
-  resave: false,
-  store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  saveUninitialized: false,
-  secret: SESS_SECRET,
-  cookie: {
-      sameSite: true,
-      secure: IN_PROD,
-  }
-}));
+//router.use(session({
+//  name: SESS_NAME,
+//  resave: false,
+//  store: new MongoStore({ mongooseConnection: mongoose.connection }),
+//  saveUninitialized: false,
+//  secret: SESS_SECRET,
+//  cookie: {
+//      sameSite: true,
+//      secure: IN_PROD,
+//  }
+//}));
 
-router.route('/register').post( async (req, res) => {
+router.route('/').post( async (req, res) => {
   try {
     const password = await bcrypt.hash(req.body.password, 10);
     const firstName = req.body.firstName;
@@ -29,8 +29,8 @@ router.route('/register').post( async (req, res) => {
     const email = req.body.email;
     const newUser = new User({ firstName, lastName, email, password });
     newUser.save()
-        .then(() => res.json('User added!'))
-        .catch(err => res.status(400).json('Error: ' + err));
+        .then(() => res.send('User added!'))
+        .catch(err => res.status(400).send('Error: ' + err));
   } catch {
     res.status(500).send();
   }
