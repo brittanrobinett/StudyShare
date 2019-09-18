@@ -1,0 +1,21 @@
+#viewport {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    display: flex;
+  }
+#register-login-container {
+    background-color: white;
+    margin: auto; 
+    width: 40%; 
+    border: 1px; 
+    border-color: rgb(50, 50, 50); 
+    border-style: solid; 
+    border-radius: 15px; 
+}
+#register-login-form {
+    margin: 2vh;
+}
