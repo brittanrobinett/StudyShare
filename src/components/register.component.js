@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../stylesheets/register-login.css';
+import axios from 'axios';
 
 export default class Register extends Component {
     constructor(props) {
@@ -52,8 +53,10 @@ export default class Register extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        console.log(user);
-        // window.location = '/dashboard';
+
+        axios.post('http://localhost:5000/register', user)
+          .then(res => console.log(res.data))
+          .catch(res => console.log(res.data));
     }
 
     render() {
@@ -84,7 +87,7 @@ export default class Register extends Component {
                             <input type="password" className="form-control" placeholder="Password" value={this.state.password} onChange={this.onChangePassword} />
                         </div>
                         <button type="submit" className="btn btn-primary">Submit</button>
-                        <button type="button" className="btn btn-link">Already have an account?</button>
+                        <Link to="/login" className="btn btn-link">Already have an account?</Link>
                     </form>
                 </div>
             </div>

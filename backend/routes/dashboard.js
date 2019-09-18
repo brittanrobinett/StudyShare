@@ -20,14 +20,13 @@ router.use(session({
   }
 }));
 
-const redirectLogin = (req, res, next) => {
-  if(!req.session.userId) {
-    res.redirect('/login');
-  } else {
-    next();
-  }
-}
-
-
+//router.route('/').get((req, res) => {
+//  User.findOne({ _id: req.session.userId })
+//    .then(user => {
+//      res.send(user);
+//    })
+//    .catch(err => res.send(err));
+//
+//});
 
 module.exports = router;
