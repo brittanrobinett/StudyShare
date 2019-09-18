@@ -1,0 +1,61 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+  }
+
+  #sidebar-wrapper {
+    width: 250px;
+    position: absolute;
+    height: 100%;
+    z-index: 1;
+    overflow-y: hidden;
+    background: grey;
+    color: white;
+  }
+
+  #sidebar a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  #message-input {
+    width: 100%;
+    margin-left: 250px;
+    border: 0;
+    box-shadow: none;
+  }
+
+  #send-button {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+  }
+
+  #page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding-left: 250px;
+  }
+
+  .message {
+    padding: 5px;
+    border: .5px solid grey;
+    border-radius: 10px;
+    margin: 10px;
+  }
+
+  .chat {
+    padding-top: 15px;
+  }
+
+  @media (max-width: 600px) {
+    #sidebar-wrapper {
+      width: 0;
+    }
+    #page-content-wrapper {
+      padding-left: 0px;
+    }
+    #message-input {
+      margin-left: 0px;
+    }
+  }
