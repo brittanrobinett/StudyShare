@@ -20,13 +20,25 @@ router.use(session({
   }
 }));
 
-//router.route('/').get((req, res) => {
-//  User.findOne({ _id: req.session.userId })
-//    .then(user => {
-//      res.send(user);
-//    })
-//    .catch(err => res.send(err));
-//
-//});
+router.route('/').get((req, res) => {
+  console.log("top of get");
+  User.findOne({ _id: req.session.userId }) // FIX: not able to find session / user
+    .then(user => {
+      console.log(req.session.userId);
+      res.send(user);
+    })
+    .catch(err => {
+      res.send(err);
+    })
+
+});
+
+router.route('/logout').post((req, res) => {
+  //req.session.destroy(err => {
+  //  if (err) {
+  //    return res
+  //  }
+ //  })
+})
 
 module.exports = router;
