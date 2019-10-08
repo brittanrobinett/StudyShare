@@ -9,17 +9,17 @@ const SESS_NAME = 'sid';
 const SESS_SECRET = 'youshouldchangethis'
 const IN_PROD = false;
 
-//router.use(session({
-//  name: SESS_NAME,
-//  resave: false,
-//  store: new MongoStore({ mongooseConnection: mongoose.connection }),
-//  saveUninitialized: false,
-//  secret: SESS_SECRET,
-//  cookie: {
-//      sameSite: true,
-//      secure: IN_PROD,
-//  }
-//}));
+router.use(session({
+  name: SESS_NAME,
+  resave: false,
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  saveUninitialized: false,
+  secret: SESS_SECRET,
+  cookie: {
+      sameSite: true,
+      secure: IN_PROD,
+  }
+}));
 
 router.route('/').post( async (req, res) => {
   try {
@@ -29,7 +29,10 @@ router.route('/').post( async (req, res) => {
     const email = req.body.email;
     const newUser = new User({ firstName, lastName, email, password });
     newUser.save()
-        .then(() => res.send('User added!'))
+        .then(user => {
+          req.session.userId = user._id; // FIX: does this create cookie?
+          res.send(req.session.userId);
+        })
         .catch(err => res.status(400).send('Error: ' + err));
   } catch {
     res.status(500).send();
