@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import '../stylesheets/register-login.css';
 import axios from 'axios';
 
@@ -13,7 +14,8 @@ export default class Login extends Component {
 
       this.state = {
           email: '',
-          password: ''
+          password: '',
+          fireRedirect: false
       }
   }
 
@@ -35,9 +37,8 @@ export default class Login extends Component {
           email: this.state.email,
           password: this.state.password
       }
-      console.log(user);
       axios.post('http://localhost:5000/login', user)
-        .then(res => console.log(res.data))
+        .then(res => this.setState({fireRedirect: true}))
         .catch(res => console.log(res.data));
   }
 
@@ -60,6 +61,7 @@ export default class Login extends Component {
                         <Link to="/register" className="btn btn-link">Dont have an account?</Link>
                     </form>
                 </div>
+                {this.state.fireRedirect && <Redirect to='/dashboard' push={true} />}
             </div>
         );
     }
